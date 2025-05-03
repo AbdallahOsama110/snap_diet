@@ -21,3 +21,27 @@ class FoodClassifierError extends HomeStates {
 
 class FoodClassifierLoading extends HomeStates {}
 class FoodClassifierSuccess extends HomeStates {}
+
+class CheckFoodExistenceSuccess extends HomeStates {}
+class CheckFoodExistenceError extends HomeStates {}
+
+class SaveFoodLoading extends HomeStates {}
+class SaveFoodSuccess extends HomeStates {}
+class SaveFoodError extends HomeStates {
+  final String error;
+  SaveFoodError(this.error);
+}
+
+class PageChanged extends HomeStates {
+  final int newIndex;
+  PageChanged(this.newIndex);
+}
+
+class GetFoodHistoryLoading extends HomeStates {}
+class GetFoodHistorySuccess extends HomeStates {}
+class GetFoodHistoryError extends HomeStates {
+  final String error;
+  GetFoodHistoryError(this.error);
+}
+
+class SortFoodHistory extends HomeStates {}

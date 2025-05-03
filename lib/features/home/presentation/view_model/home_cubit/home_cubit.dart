@@ -9,10 +9,15 @@ import 'package:image/image.dart' as img;
 import 'package:flutter/services.dart' show rootBundle;
 
 import '../../../../../core/models/food_model.dart';
+import '../../../../../core/utils/food_database_service.dart';
 part 'home_states.dart';
 
 class HomeCubit extends Cubit<HomeStates> {
-  HomeCubit() : super(HomeInitial());
+  HomeCubit() : super(HomeInitial()) {
+    _loadModel().then((_) {
+      _getHistory();
+    });
+  }
   static HomeCubit get(context) => BlocProvider.of(context);
 
   File? selectedImage;
@@ -22,7 +27,9 @@ class HomeCubit extends Cubit<HomeStates> {
   List<String> labels = [];
   String classificationResult = "";
   List<FoodModel> foodList = [];
+  List<FoodModel> foodHistory = [];
   FoodModel? foodItem;
+  bool isFoodExist = false;
 
   Future<List<FoodModel>> _loadFoodItems() async {
     try {
@@ -46,7 +53,7 @@ class HomeCubit extends Cubit<HomeStates> {
     }
   }
 
-  Future<void> loadModel() async {
+  Future<void> _loadModel() async {
     try {
       interpreter = await Interpreter.fromAsset('assets/models/aiy.tflite');
       labels = await _loadLabels();
@@ -89,6 +96,7 @@ class HomeCubit extends Cubit<HomeStates> {
     }
     emit(FoodClassifierLoading());
     try {
+      isFoodExist = false;
       outputProbabilities = await _runInference(selectedImage!);
       int maxIndex = _getMaxIndex(outputProbabilities!);
       classificationResult =
@@ -99,6 +107,19 @@ class HomeCubit extends Cubit<HomeStates> {
           (food) => food.id.toString() == classificationResult.split(',')[0],
           orElse: () =>
               FoodModel(id: 0, name: "Unknown", calories: 0, recipe: ""));
+
+      //check if foodItem in the database or not
+      if (foodItem != null) {
+        final db = FoodDatabaseService.instance;
+        try {
+          isFoodExist = await db.doesFoodExist(foodItem!.id);
+          log("Food existence: $isFoodExist");
+          emit(CheckFoodExistenceSuccess());
+        } catch (e) {
+          log("Error checking food existence: $e");
+          emit(CheckFoodExistenceError());
+        }
+      }
       emit(FoodClassifierSuccess());
     } catch (e) {
       log("Error processing image: $e");
@@ -141,6 +162,45 @@ class HomeCubit extends Cubit<HomeStates> {
 
   int _getMaxIndex(List<int> probabilities) {
     return probabilities.indexOf(probabilities.reduce(max)) + 1;
+  }
+
+  void saveFoodItem() async {
+    if (foodItem != null && !isFoodExist) {
+      final db = FoodDatabaseService.instance;
+      try {
+        emit(SaveFoodLoading());
+        await db.insertFood(foodItem!);
+        log("Food item saved successfully");
+        isFoodExist = true;
+        emit(SaveFoodSuccess());
+        _getHistory();
+      } catch (e) {
+        log("Error saving food item: $e");
+        emit(SaveFoodError("Error saving food item: $e"));
+      }
+    }
+  }
+
+  void _getHistory() async {
+    final db = FoodDatabaseService.instance;
+    try {
+      emit(GetFoodHistoryLoading());
+      foodHistory = await db.getFoodHistory();
+      emit(GetFoodHistorySuccess());
+    } catch (e) {
+      log("Error loading food history: $e");
+      emit(GetFoodHistoryError("Error loading food history: $e"));
+    }
+  }
+
+  void sortHistoryOnDate() {
+    foodHistory.sort((a, b) => b.timestamp!.compareTo(a.timestamp!));
+    emit(SortFoodHistory());
+  }
+
+  void sortHistoryOnCalories() {
+    foodHistory.sort((a, b) => b.calories.compareTo(a.calories));
+    emit(SortFoodHistory());
   }
 }
 

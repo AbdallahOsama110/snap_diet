@@ -1,0 +1,1 @@
+const tabs = ['Home', 'History'];

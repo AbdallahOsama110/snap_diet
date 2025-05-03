@@ -9,18 +9,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Sizer(
-      builder: (cxt, orientation, deviceType) {
-        return MaterialApp(
-          title: 'SnapDiet ',
-          theme: lightTheme().copyWith(
-            textTheme: GoogleFonts.poppinsTextTheme(
-              lightTheme().textTheme,
-            ),
+    return Sizer(builder: (cxt, orientation, deviceType) {
+      return MaterialApp(
+        title: 'SnapDiet ',
+        debugShowCheckedModeBanner: false,
+        theme: lightTheme().copyWith(
+          textTheme: GoogleFonts.poppinsTextTheme(
+            lightTheme().textTheme,
           ),
-          home: HomeView(),
-        );
-      }
-    );
+        ),
+        home: HomeView(),
+      );
+    });
   }
 }

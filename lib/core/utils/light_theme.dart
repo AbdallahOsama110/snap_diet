@@ -5,70 +5,98 @@ ThemeData lightTheme() {
   return ThemeData(
     useMaterial3: true,
     textTheme: TextTheme(
-      //! FS 40
-      headlineLarge: TextStyle(
-        fontSize: 27.sp,
-        fontWeight: FontWeight.bold,
-        color: Colors.black,
-      ),
-      //! FS 32
-      headlineMedium: TextStyle(
-        fontSize: 23.36.sp,
-        fontWeight: FontWeight.w700,
-        color: Colors.black,
-        height: 1.26,
-      ),
-      //! FS 25
-      headlineSmall: TextStyle(
-        fontSize: 18.25.sp,
-        fontWeight: FontWeight.w600,
-        color: Colors.black.withValues(alpha: .8),
-      ),
-      //! FS 20
-      titleLarge: TextStyle(
-        fontSize: 22.sp,
-        fontWeight: FontWeight.w600,
-        color: Colors.black.withValues(alpha: .8),
-      ),
-      //! FS 18
-      bodyLarge: TextStyle(
-        fontSize: 19.sp,
-        fontWeight: FontWeight.w600,
-        color: Colors.black.withValues(alpha: .8),
-      ),
-      //! Fs 16
-      bodyMedium: TextStyle(
+        //! FS 40
+        headlineLarge: TextStyle(
+          fontSize: 27.sp,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
+        ),
+        //! FS 32
+        headlineMedium: TextStyle(
+          fontSize: 23.36.sp,
+          fontWeight: FontWeight.w700,
+          color: Colors.black,
+          height: 1.26,
+        ),
+        //! FS 25
+        headlineSmall: TextStyle(
+          fontSize: 18.25.sp,
+          fontWeight: FontWeight.w600,
+          color: Colors.black.withValues(alpha: .8),
+        ),
+        //! FS 20
+        titleLarge: TextStyle(
+          fontSize: 22.sp,
+          fontWeight: FontWeight.w600,
+          color: Colors.black.withValues(alpha: .8),
+        ),
+        //! FS 18
+        bodyLarge: TextStyle(
+          fontSize: 19.sp,
+          fontWeight: FontWeight.w600,
+          color: Colors.black.withValues(alpha: .8),
+        ),
+        //! Fs 16
+        bodyMedium: TextStyle(
+          fontSize: 17.5.sp,
+          height: 1.4,
+          fontWeight: FontWeight.w500,
+        ),
+        //! FS 14
+        bodySmall: TextStyle(
+          fontSize: 15.5.sp,
+          height: 1.3,
+          fontWeight: FontWeight.w500,
+        ),
+        labelLarge: TextStyle(
+          fontSize: 14.sp,
+          height: 1.3,
+          fontWeight: FontWeight.w500,
+        )),
+
+    listTileTheme: ListTileThemeData(
+      iconColor: ColorName.secondaryColor,
+
+      // Text styles
+      titleTextStyle: TextStyle(
         fontSize: 16.65.sp,
+        color: Colors.black.withValues(alpha: .8),
+        fontWeight: FontWeight.bold,
         height: 1.4,
-        fontWeight: FontWeight.w500,
       ),
-      //! FS 14
-      bodySmall: TextStyle(
-        fontSize: 15.5.sp,
-        height: 1.3,
-        fontWeight: FontWeight.w500,
-      ),
-      //! FS 13
-      labelLarge: TextStyle(
-        fontSize: 14.sp,
+      subtitleTextStyle: TextStyle(
+        fontSize: 15.sp,
+        color: ColorName.secondaryColor,
         fontWeight: FontWeight.normal,
       ),
-      //! FS 10
-      labelMedium: TextStyle(
-        fontSize: 13.sp,
-        fontWeight: FontWeight.w300,
-      ),
-      //! FS 9
-      labelSmall: TextStyle(
-        fontSize: 6.5.sp,
-        height: 1.3,
+      leadingAndTrailingTextStyle: TextStyle(
+        fontSize: 16.65.sp,
         fontWeight: FontWeight.bold,
+        color: ColorName.primaryColor,
       ),
+
+      // Layout
+      contentPadding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+      minVerticalPadding: 8,
+      minLeadingWidth: 36,
+      horizontalTitleGap: 16,
+
+      // Shape
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+
+      // Density
+      dense: false,
+      visualDensity: VisualDensity.standard,
     ),
+
     scaffoldBackgroundColor: ColorName.bgLight,
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
-        foregroundColor: WidgetStateProperty.all<Color>(ColorName.primaryColor),
+        iconColor: WidgetStateProperty.all<Color>(ColorName.secondaryColor),
+        foregroundColor:
+            WidgetStateProperty.all<Color>(ColorName.secondaryColor),
         textStyle: WidgetStateProperty.all<TextStyle>(
           TextStyle(
             fontSize: 16.65.sp,
@@ -78,7 +106,6 @@ ThemeData lightTheme() {
       ),
     ),
     appBarTheme: AppBarTheme(
-      //toolbarHeight: 5.h,
       scrolledUnderElevation: 0,
       backgroundColor: Colors.transparent,
       iconTheme: IconThemeData(color: ColorName.secondaryColor, size: 30),
@@ -86,7 +113,7 @@ ThemeData lightTheme() {
         fontWeight: FontWeight.w900,
         //! FS 24,
         fontSize: 20.5.sp,
-        color: Colors.black,
+        color: Colors.black.withValues(alpha: .8),
       ),
     ),
     iconTheme: const IconThemeData(color: ColorName.secondaryColor),
@@ -95,10 +122,6 @@ ThemeData lightTheme() {
         iconColor: WidgetStatePropertyAll(ColorName.secondaryColor),
       ),
     ),
-    listTileTheme: const ListTileThemeData(
-      iconColor: ColorName.secondaryColor,
-    ),
-
     //colorScheme: ColorScheme.fromSeed(seedColor: scaffoldBackgroundColorDark),
     progressIndicatorTheme: ProgressIndicatorThemeData(
       color: ColorName.primaryColor,
