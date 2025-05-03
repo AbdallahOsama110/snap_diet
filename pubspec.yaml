@@ -8,16 +8,19 @@ environment:
   sdk: ^3.6.0
 
 dependencies:
+  conditional_builder_null_safety: ^0.0.6
   cupertino_icons: ^1.0.8
   flutter:
     sdk: flutter
   flutter_bloc: ^9.0.0
+  font_awesome_flutter: ^10.8.0
+  google_fonts: ^6.2.1
   image: ^4.5.3
   image_picker: ^1.1.2
+  sizer: ^3.0.5
   tflite_flutter: ^0.11.0
 
 dev_dependencies:
-
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
@@ -29,4 +32,5 @@ flutter:
   assets:
     - assets/models/
     - assets/models/aiy.tflite
+    - assets/models/aiy_food_V1_calories_&_recipes.json
     - assets/models/mobile_food_segmenter_V1.tflite

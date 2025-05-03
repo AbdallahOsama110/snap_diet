@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/sizer.dart';
+import 'core/utils/light_theme.dart';
 import 'features/home/presentation/view/home_view.dart';
 
 class MyApp extends StatelessWidget {
@@ -6,14 +9,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'SnapDiet ',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: HomeView(),
+    return Sizer(
+      builder: (cxt, orientation, deviceType) {
+        return MaterialApp(
+          title: 'SnapDiet ',
+          theme: lightTheme().copyWith(
+            textTheme: GoogleFonts.poppinsTextTheme(
+              lightTheme().textTheme,
+            ),
+          ),
+          home: HomeView(),
+        );
+      }
     );
   }
 }
-

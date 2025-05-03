@@ -1,11 +1,14 @@
 import 'dart:developer';
 import 'dart:io';
+import 'dart:convert';
 import 'dart:math' hide log;
 import 'package:tflite_flutter/tflite_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as img;
 import 'package:flutter/services.dart' show rootBundle;
+
+import '../../../../../core/models/food_model.dart';
 part 'home_states.dart';
 
 class HomeCubit extends Cubit<HomeStates> {
@@ -18,11 +21,36 @@ class HomeCubit extends Cubit<HomeStates> {
   int confidence = 0;
   List<String> labels = [];
   String classificationResult = "";
+  List<FoodModel> foodList = [];
+  FoodModel? foodItem;
+
+  Future<List<FoodModel>> _loadFoodItems() async {
+    try {
+      // Load JSON file from assets
+      final String response = await rootBundle
+          .loadString('assets/models/aiy_food_V1_calories_&_recipes.json');
+
+      // Decode JSON
+      final Map<String, dynamic> data = await json.decode(response);
+
+      // Convert each item to FoodModel
+      List<FoodModel> foodList = (data['food_items'] as List)
+          .map((item) => FoodModel.fromJson(item))
+          .toList();
+
+      return foodList;
+    } catch (e) {
+      log("Error loading food items: $e");
+      emit(FoodClassifierError("Error loading food items: $e"));
+      return []; // Return empty list on error
+    }
+  }
 
   Future<void> loadModel() async {
     try {
       interpreter = await Interpreter.fromAsset('assets/models/aiy.tflite');
       labels = await _loadLabels();
+      foodList = await _loadFoodItems();
       emit(FoodClassifierModelLoaded());
     } catch (e) {
       log(e.toString());
@@ -67,6 +95,10 @@ class HomeCubit extends Cubit<HomeStates> {
           labels.isNotEmpty ? labels[maxIndex] : "Class ID: $maxIndex";
       confidence = outputProbabilities![maxIndex - 1];
       log("Top Food Class: $classificationResult with confidence: $confidence");
+      foodItem = foodList.firstWhere(
+          (food) => food.id.toString() == classificationResult.split(',')[0],
+          orElse: () =>
+              FoodModel(id: 0, name: "Unknown", calories: 0, recipe: ""));
       emit(FoodClassifierSuccess());
     } catch (e) {
       log("Error processing image: $e");
