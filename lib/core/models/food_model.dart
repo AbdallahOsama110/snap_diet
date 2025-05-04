@@ -19,7 +19,6 @@ class FoodModel {
       name: json['name'],
       calories: json['calories'],
       recipe: json['recipe'],
-      
     );
   }
 }

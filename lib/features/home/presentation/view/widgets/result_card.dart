@@ -25,7 +25,7 @@ class ResultCard extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyLarge!,
           ),
           Text(
-            "Detected with ${cubit.confidence}% confidence",
+            "Detected with ${cubit.confidence} confidence",
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: ColorName.secondaryColor,
                 ),

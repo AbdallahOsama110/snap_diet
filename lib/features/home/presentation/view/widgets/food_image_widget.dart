@@ -14,7 +14,7 @@ class FoodImageWidget extends StatelessWidget {
       borderType: BorderType.RRect,
       dashPattern: [5, 3],
       color: ColorName.secondaryColor.withValues(alpha: 0.3),
-      radius: Radius.circular(20),
+      radius: Radius.circular(21),
       child: Container(
         height: 30.h,
         width: double.infinity,
