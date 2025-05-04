@@ -44,7 +44,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
   Future<void> initFadeAnimation() async {
     fadeAnimationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 1500));
+        vsync: this, duration: const Duration(milliseconds: 2500));
     fadeAnimation =
         CurvedAnimation(parent: fadeAnimationController, curve: Curves.ease);
     fadeAnimationController.forward();

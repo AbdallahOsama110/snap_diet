@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import '../../../../../core/utils/light_theme.dart';
 import 'calories_section.dart';
 import 'save_to_history_button.dart';
@@ -6,9 +7,7 @@ import '../../view_model/home_cubit/home_cubit.dart';
 
 class ResultCard extends StatelessWidget {
   const ResultCard({super.key, required this.cubit});
-
   final HomeCubit cubit;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,9 +29,9 @@ class ResultCard extends StatelessWidget {
                   color: ColorName.secondaryColor,
                 ),
           ),
-          SizedBox(height: 15),
+          SizedBox(height: 1.7.h),
           CaloriesSection(cubit: cubit),
-          SizedBox(height: 15),
+          SizedBox(height: 1.7.h),
           SaveToHistoryButton(cubit: cubit),
         ],
       ),

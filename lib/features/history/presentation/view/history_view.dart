@@ -18,7 +18,7 @@ class HistoryView extends StatelessWidget {
           var cubit = HistoryCubit.get(context);
           return Column(
             children: [
-              SizedBox(height: 3.h),
+              SizedBox(height: 2.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
