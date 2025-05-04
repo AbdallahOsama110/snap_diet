@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../history/presentation/view-model/history-cubit/history_cubit.dart';
 import 'widgets/app_bar_title.dart';
 import 'widgets/tab_bar_item.dart';
 import 'widgets/home_view_body.dart';
@@ -49,39 +50,41 @@ class _HomeViewState extends State<HomeView>
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomeCubit(),
-      child: BlocBuilder<HomeCubit, HomeStates>(
-        builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(
-              title: AppBarTitle(),
-              bottom: TabBar(
-                controller: _tabController,
-                tabs: [
-                  TabBarItem(title: "Home", icon: Icons.home_rounded),
-                  TabBarItem(title: "History", icon: Icons.history_rounded),
-                ],
-                indicatorColor: ColorName.primaryColor,
-                labelColor: ColorName.secondaryColor,
-                unselectedLabelColor: ColorName.secondaryColor,
-                isScrollable: false,
-              ),
-            ),
-            body: PageView(
-              controller: _pageController,
-              onPageChanged: (index) {
-                setState(() => currentPage = index);
-                _tabController.animateTo(index);
-              },
-              children: [
-                HomeViewBody(),
-                HistoryView(),
+    return BlocConsumer<HomeCubit, HomeStates>(
+      listener: (context, state) {
+        if (state is SaveFoodSuccess){
+          HistoryCubit.get(context).getHistory();
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            title: AppBarTitle(),
+            bottom: TabBar(
+              controller: _tabController,
+              tabs: [
+                TabBarItem(title: "Home", icon: Icons.home_rounded),
+                TabBarItem(title: "History", icon: Icons.history_rounded),
               ],
+              indicatorColor: ColorName.primaryColor,
+              labelColor: ColorName.secondaryColor,
+              unselectedLabelColor: ColorName.secondaryColor,
+              isScrollable: false,
             ),
-          );
-        },
-      ),
+          ),
+          body: PageView(
+            controller: _pageController,
+            onPageChanged: (index) {
+              setState(() => currentPage = index);
+              _tabController.animateTo(index);
+            },
+            children: [
+              HomeViewBody(),
+              HistoryView(),
+            ],
+          ),
+        );
+      },
     );
   }
 }

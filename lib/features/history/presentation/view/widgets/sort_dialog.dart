@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../../core/utils/light_theme.dart';
-import '../../../../home/presentation/view_model/home_cubit/home_cubit.dart';
+import '../../view-model/history-cubit/history_cubit.dart';
 
 class SortDialog extends StatelessWidget {
   const SortDialog({super.key, required this.cubit});
-  final HomeCubit cubit;
+  final HistoryCubit cubit;
   @override
   Widget build(BuildContext context) {
     return Dialog(

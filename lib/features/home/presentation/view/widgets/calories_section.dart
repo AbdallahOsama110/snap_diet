@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:snap_diet/core/utils/light_theme.dart';
-import 'package:snap_diet/features/home/presentation/view_model/home_cubit/home_cubit.dart';
+import '../../../../../core/utils/light_theme.dart';
+import '../../view_model/home_cubit/home_cubit.dart';
 
 class CaloriesSection extends StatelessWidget {
   const CaloriesSection({

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sizer/sizer.dart';
-import 'package:snap_diet/features/history/presentation/view/widgets/food_item.dart';
-import '../../../home/presentation/view_model/home_cubit/home_cubit.dart';
+import 'widgets/food_item.dart';
+import '../view-model/history-cubit/history_cubit.dart';
 import 'widgets/sort_dialog.dart';
 
 class HistoryView extends StatelessWidget {
@@ -13,9 +13,9 @@ class HistoryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: BlocBuilder<HomeCubit, HomeStates>(
+      child: BlocBuilder<HistoryCubit, HistoryState>(
         builder: (context, state) {
-          var cubit = HomeCubit.get(context);
+          var cubit = HistoryCubit.get(context);
           return Column(
             children: [
               SizedBox(height: 3.h),

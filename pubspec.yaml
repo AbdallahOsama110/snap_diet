@@ -10,6 +10,7 @@ environment:
 dependencies:
   conditional_builder_null_safety: ^0.0.6
   cupertino_icons: ^1.0.8
+  dotted_border: ^2.1.0
   flutter:
     sdk: flutter
   flutter_bloc: ^9.0.0
@@ -34,6 +35,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/images/
     - assets/models/
     - assets/models/aiy.tflite
     - assets/models/aiy_food_V1_calories_&_recipes.json

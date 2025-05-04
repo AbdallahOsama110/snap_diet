@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:snap_diet/core/models/food_model.dart';
-import 'package:snap_diet/features/food-details/presentation/view/food_details_view.dart';
-import 'package:snap_diet/features/history/data/history_datetime_format.dart';
+import '../../../../../core/models/food_model.dart';
+import '../../../../food-details/presentation/view/food_details_view.dart';
+import '../../../data/history_datetime_format.dart';
 
 class FoodItem extends StatelessWidget {
   const FoodItem({super.key, required this.foodItem});

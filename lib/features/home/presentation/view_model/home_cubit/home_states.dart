@@ -36,12 +36,3 @@ class PageChanged extends HomeStates {
   final int newIndex;
   PageChanged(this.newIndex);
 }
-
-class GetFoodHistoryLoading extends HomeStates {}
-class GetFoodHistorySuccess extends HomeStates {}
-class GetFoodHistoryError extends HomeStates {
-  final String error;
-  GetFoodHistoryError(this.error);
-}
-
-class SortFoodHistory extends HomeStates {}

@@ -5,54 +5,55 @@ ThemeData lightTheme() {
   return ThemeData(
     useMaterial3: true,
     textTheme: TextTheme(
-        //! FS 40
-        headlineLarge: TextStyle(
-          fontSize: 27.sp,
-          fontWeight: FontWeight.bold,
-          color: Colors.black,
-        ),
-        //! FS 32
-        headlineMedium: TextStyle(
-          fontSize: 23.36.sp,
-          fontWeight: FontWeight.w700,
-          color: Colors.black,
-          height: 1.26,
-        ),
-        //! FS 25
-        headlineSmall: TextStyle(
-          fontSize: 18.25.sp,
-          fontWeight: FontWeight.w600,
-          color: Colors.black.withValues(alpha: .8),
-        ),
-        //! FS 20
-        titleLarge: TextStyle(
-          fontSize: 22.sp,
-          fontWeight: FontWeight.w600,
-          color: Colors.black.withValues(alpha: .8),
-        ),
-        //! FS 18
-        bodyLarge: TextStyle(
-          fontSize: 19.sp,
-          fontWeight: FontWeight.w600,
-          color: Colors.black.withValues(alpha: .8),
-        ),
-        //! Fs 16
-        bodyMedium: TextStyle(
-          fontSize: 17.5.sp,
-          height: 1.4,
-          fontWeight: FontWeight.w500,
-        ),
-        //! FS 14
-        bodySmall: TextStyle(
-          fontSize: 15.5.sp,
-          height: 1.3,
-          fontWeight: FontWeight.w500,
-        ),
-        labelLarge: TextStyle(
-          fontSize: 14.sp,
-          height: 1.3,
-          fontWeight: FontWeight.w500,
-        )),
+      //! FS 40
+      headlineLarge: TextStyle(
+        fontSize: 27.sp,
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+      ),
+      //! FS 32
+      headlineMedium: TextStyle(
+        fontSize: 23.36.sp,
+        fontWeight: FontWeight.w700,
+        color: Colors.black,
+        height: 1.26,
+      ),
+      //! FS 25
+      headlineSmall: TextStyle(
+        fontSize: 18.25.sp,
+        fontWeight: FontWeight.w600,
+        color: Colors.black.withValues(alpha: .8),
+      ),
+      //! FS 20
+      titleLarge: TextStyle(
+        fontSize: 22.sp,
+        fontWeight: FontWeight.w600,
+        color: Colors.black.withValues(alpha: .8),
+      ),
+      //! FS 18
+      bodyLarge: TextStyle(
+        fontSize: 19.sp,
+        fontWeight: FontWeight.w600,
+        color: Colors.black.withValues(alpha: .8),
+      ),
+      //! Fs 16
+      bodyMedium: TextStyle(
+        fontSize: 17.5.sp,
+        height: 1.4,
+        fontWeight: FontWeight.w500,
+      ),
+      //! FS 14
+      bodySmall: TextStyle(
+        fontSize: 15.5.sp,
+        height: 1.3,
+        fontWeight: FontWeight.w500,
+      ),
+      labelLarge: TextStyle(
+        fontSize: 14.sp,
+        height: 1.3,
+        fontWeight: FontWeight.w500,
+      ),
+    ),
 
     listTileTheme: ListTileThemeData(
       iconColor: ColorName.secondaryColor,
@@ -128,6 +129,7 @@ ThemeData lightTheme() {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
+        elevation: WidgetStateProperty.all<double>(0),
         foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
         backgroundColor: WidgetStateProperty.all<Color>(ColorName.primaryColor),
         textStyle: WidgetStateProperty.all<TextStyle>(

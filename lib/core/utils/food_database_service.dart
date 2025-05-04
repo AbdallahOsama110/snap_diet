@@ -69,6 +69,19 @@ class FoodDatabaseService {
     );
   }
 
+  Future<void> deleteFoodItem(int id) async {
+  final db = await instance.database;
+  try {
+    await db.delete(
+      'food_history',
+      where: 'id = $id',
+    );
+    log('Food item with id $id deleted successfully.');
+  } catch (e) {
+    log('Error deleting food item: $e');
+  }
+}
+
   // Get all food history sorted by timestamp (newest first)
   Future<List<FoodModel>> getFoodHistory() async {
     final db = await instance.database;

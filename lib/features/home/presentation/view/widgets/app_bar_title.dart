@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snap_diet/core/utils/light_theme.dart';
+import '../../../../../core/utils/light_theme.dart';
 
 class AppBarTitle extends StatelessWidget {
   const AppBarTitle({super.key});

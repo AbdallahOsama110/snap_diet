@@ -7,16 +7,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as img;
 import 'package:flutter/services.dart' show rootBundle;
-
 import '../../../../../core/models/food_model.dart';
 import '../../../../../core/utils/food_database_service.dart';
 part 'home_states.dart';
 
 class HomeCubit extends Cubit<HomeStates> {
   HomeCubit() : super(HomeInitial()) {
-    _loadModel().then((_) {
-      _getHistory();
-    });
+    _loadModel();
   }
   static HomeCubit get(context) => BlocProvider.of(context);
 
@@ -27,20 +24,16 @@ class HomeCubit extends Cubit<HomeStates> {
   List<String> labels = [];
   String classificationResult = "";
   List<FoodModel> foodList = [];
-  List<FoodModel> foodHistory = [];
   FoodModel? foodItem;
   bool isFoodExist = false;
 
   Future<List<FoodModel>> _loadFoodItems() async {
     try {
-      // Load JSON file from assets
       final String response = await rootBundle
           .loadString('assets/models/aiy_food_V1_calories_&_recipes.json');
 
-      // Decode JSON
       final Map<String, dynamic> data = await json.decode(response);
 
-      // Convert each item to FoodModel
       List<FoodModel> foodList = (data['food_items'] as List)
           .map((item) => FoodModel.fromJson(item))
           .toList();
@@ -49,7 +42,7 @@ class HomeCubit extends Cubit<HomeStates> {
     } catch (e) {
       log("Error loading food items: $e");
       emit(FoodClassifierError("Error loading food items: $e"));
-      return []; // Return empty list on error
+      return [];
     }
   }
 
@@ -173,143 +166,10 @@ class HomeCubit extends Cubit<HomeStates> {
         log("Food item saved successfully");
         isFoodExist = true;
         emit(SaveFoodSuccess());
-        _getHistory();
       } catch (e) {
         log("Error saving food item: $e");
         emit(SaveFoodError("Error saving food item: $e"));
       }
     }
   }
-
-  void _getHistory() async {
-    final db = FoodDatabaseService.instance;
-    try {
-      emit(GetFoodHistoryLoading());
-      foodHistory = await db.getFoodHistory();
-      emit(GetFoodHistorySuccess());
-    } catch (e) {
-      log("Error loading food history: $e");
-      emit(GetFoodHistoryError("Error loading food history: $e"));
-    }
-  }
-
-  void sortHistoryOnDate() {
-    foodHistory.sort((a, b) => b.timestamp!.compareTo(a.timestamp!));
-    emit(SortFoodHistory());
-  }
-
-  void sortHistoryOnCalories() {
-    foodHistory.sort((a, b) => b.calories.compareTo(a.calories));
-    emit(SortFoodHistory());
-  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* import 'dart:developer';
-import 'dart:io';
-import 'package:tflite_flutter/tflite_flutter.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:image/image.dart' as img;
-part 'home_states.dart';
-
-class HomeCubit extends Cubit<HomeStates> {
-  HomeCubit() : super(HomeInitial());
-  static HomeCubit get(context) => BlocProvider.of(context);
-
-  File? selectedImage;
-  Interpreter? interpreter;
-  List<List<List<double>>>? segmentationResult;
-
-    Future<void> loadModel() async {
-    try {
-      interpreter = await Interpreter.fromAsset('assets/models/mobile_food_segmenter_V1.tflite');
-      emit(FoodSegmenterModelLoaded());
-    } catch (e) {
-      log(e.toString());
-      emit(FoodSegmenterError("Failed to load model: $e"));
-    }
-  }
-
-  Future<void> pickImage(ImageSource source) async {
-    emit(PickImageLoading());
-    try {
-      final ImagePicker picker = ImagePicker();
-      XFile? imageFile = await picker.pickImage(source: source);
-      
-      if (imageFile == null) {
-        emit(PickImageError("No image selected"));
-        return;
-      }
-      selectedImage = File(imageFile.path);
-      emit(PickImageSuccess());
-    } catch (e) {
-      log(e.toString());
-      emit(PickImageError("Error: $e"));
-    }
-  }
-
-  Future<void> classifyImage() async {
-    if (selectedImage == null) {
-      emit(FoodSegmenterError("No image selected!"));
-      return;
-    }
-    emit(FoodSegmenterLoading());
-    try {
-      segmentationResult = await _runInference(selectedImage!);
-      log("${segmentationResult?[0][0][0]}");
-      emit(FoodSegmenterSuccess());
-    } catch (e) {
-      log("Error processing image: $e");
-      emit(FoodSegmenterError("Error processing image: $e"));
-    }
-  }
-
-
-Future<List<List<List<double>>>> _runInference(File imageFile) async {
-  // Load and decode the image
-  img.Image? image = img.decodeImage(await imageFile.readAsBytes());
-  if (image == null) throw Exception("Invalid image format");
-
-  // Resize image to 513x513
-  image = img.copyResize(image, width: 513, height: 513);
-
-  // Convert image to uint8 tensor (shape: [1, 513, 513, 3])
-  var input = List.generate(1, (_) => List.generate(513, (i) =>
-      List.generate(513, (j) {
-        final pixel = image!.getPixel(j, i); // Get pixel object
-
-        int red = pixel.r as int;   // Extract red channel
-        int green = pixel.g as int; // Extract green channel
-        int blue = pixel.b as int;  // Extract blue channel
-
-        return [red, green, blue]; // Keep as uint8 (0-255)
-      })));
-
-  // Output tensor (shape: [1, 513, 513, 26])
-  var output = List.generate(1, (_) => List.generate(513, (i) =>
-      List.generate(513, (j) =>
-          List.generate(26, (_) => 0.0)))); // Initialize as double
-
-  // Run inference
-  interpreter?.run(input, output);
-
-  return output[0];  // Remove batch dimension
-}
-
-
-}
- */
