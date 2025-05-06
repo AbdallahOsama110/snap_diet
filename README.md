@@ -24,11 +24,24 @@ SnapDiet is a Flutter-powered offline mobile application that uses AI to identif
 
 ## 📱 Screenshots
 
-<!-- Add your own screenshots in a /screenshots folder -->
-| Splash | Onboarding | Home | History | Food Details |
-|--------|------------|------|---------|--------------|
-| <img src="https://drive.google.com/uc?export=view&id=1oVL0Js-3-joY2ZED1UhNptM361TzdR1q" height="400" style="object-fit: contain;"/> | <img src="https://drive.google.com/uc?export=view&id=1otyZcfEytJfUNUTP6oWBoq5zfpUpOBYn" height="400" style="object-fit: contain;"/> | <img src="https://drive.google.com/uc?export=view&id=1oy69j4WqIQUZIdq8mPsyAE1uNoR2DtFl" height="400" style="object-fit: contain;"/> | <img src="https://drive.google.com/uc?export=view&id=1p0yRvRjV0_Vzo0AMCxEOX4ouAuI6IVpe" height="400" style="object-fit: contain;"/> | <img src="https://drive.google.com/uc?export=view&id=1ojlvBs4a4vAqOb6KX4BHZ_7Tqj-VmS7y" height="400" style="object-fit: contain;"/> |
-
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">Splash</td>
+      <td align="center">Onboarding</td>
+      <td align="center">Home</td>
+      <td align="center">History</td>
+      <td align="center">Details</td>
+    </tr>
+    <tr>
+      <td align="center" width="20%"><img src="https://drive.google.com/uc?export=view&id=1oVL0Js-3-joY2ZED1UhNptM361TzdR1q" width="200"></td>
+      <td align="center" width="20%"><img src="https://drive.google.com/uc?export=view&id=1otyZcfEytJfUNUTP6oWBoq5zfpUpOBYn" width="200"></td>
+      <td align="center" width="20%"><img src="https://drive.google.com/uc?export=view&id=1oy69j4WqIQUZIdq8mPsyAE1uNoR2DtFl" width="200"></td>
+      <td align="center" width="20%"><img src="https://drive.google.com/uc?export=view&id=1p0yRvRjV0_Vzo0AMCxEOX4ouAuI6IVpe" width="200"></td>
+      <td align="center" width="20%"><img src="https://drive.google.com/uc?export=view&id=1ojlvBs4a4vAqOb6KX4BHZ_7Tqj-VmS7y" width="200"></td>
+    </tr>
+  </table>
+</div>
 
 ---
 
