@@ -11,10 +11,11 @@ class FoodImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DottedBorder(
-      borderType: BorderType.RRect,
-      dashPattern: [5, 3],
-      color: ColorName.secondaryColor.withValues(alpha: 0.3),
-      radius: Radius.circular(21),
+      options: RoundedRectDottedBorderOptions(
+        radius: const Radius.circular(21),
+        dashPattern: [5, 3],
+        color: ColorName.secondaryColor.withValues(alpha: 0.3),
+      ),
       child: Container(
         height: 30.h,
         width: double.infinity,
@@ -41,8 +42,8 @@ class FoodImageWidget extends StatelessWidget {
               Text(
                 'Pick an image of your meal',
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: ColorName.secondaryColor,
-                    ),
+                  color: ColorName.secondaryColor,
+                ),
               ),
             ],
           ),

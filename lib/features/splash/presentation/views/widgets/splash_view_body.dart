@@ -29,14 +29,14 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
   void navigateToHomeScreen() {
     Future.delayed(
-        const Duration(seconds: 5),
+        const Duration(seconds: 3),
         () => Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => widget.nextScreen)));
   }
 
   void initVSlidingAnimation() {
     vAnimationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 1000));
+        vsync: this, duration: const Duration(milliseconds: 500));
     vSlideAnimation = Tween<Offset>(begin: const Offset(0, 1), end: Offset.zero)
         .animate(vAnimationController);
     vAnimationController.forward();
@@ -44,7 +44,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
 
   Future<void> initFadeAnimation() async {
     fadeAnimationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 2500));
+        vsync: this, duration: const Duration(milliseconds: 1250));
     fadeAnimation =
         CurvedAnimation(parent: fadeAnimationController, curve: Curves.ease);
     fadeAnimationController.forward();

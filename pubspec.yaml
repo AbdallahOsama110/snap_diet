@@ -2,15 +2,15 @@ name: snap_diet
 description: "A new Flutter project."
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.1+1
 
 environment:
-  sdk: ^3.6.0
+  sdk: ^3.8.1
 
 dependencies:
   conditional_builder_null_safety: ^0.0.6
   cupertino_icons: ^1.0.8
-  dotted_border: ^2.1.0
+  dotted_border: ^3.0.1
   flutter:
     sdk: flutter
   flutter_bloc: ^9.0.0
