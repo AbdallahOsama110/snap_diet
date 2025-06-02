@@ -1,5 +1,5 @@
 name: snap_diet
-description: "A new Flutter project."
+description: "Your meal’s story in a single snap."
 publish_to: 'none'
 
 version: 1.0.1+1
@@ -43,6 +43,3 @@ flutter:
   assets:
     - assets/images/
     - assets/models/
-    - assets/models/aiy.tflite
-    - assets/models/aiy_food_V1_calories_&_recipes.json
-    - assets/models/mobile_food_segmenter_V1.tflite
