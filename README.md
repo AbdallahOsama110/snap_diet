@@ -48,8 +48,8 @@ SnapDiet is a Flutter-powered offline mobile application that uses AI to identif
 ## 🚀 Getting Started
 
 ### Requirements
-- Flutter SDK: **>=3.6.0**
-- Dart SDK: **>=3.0.0**
+- Flutter SDK: **>=3.32.1**
+- Dart SDK: **>=3.8.1**
 - Android/iOS emulator or physical device
 
 ### Installation
