@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,18 +14,21 @@ class FoodDetailCubit extends Cubit<FoodDetailState> {
 
   static FoodDetailCubit get(context) => BlocProvider.of(context);
 
-  void copyInviteCode(BuildContext context, {required String recipe}) {
+  void copyRecipe(BuildContext context, {required String recipe}) {
     final formattedText = recipe.replaceAll(r'\n', '\n');
     try {
       Clipboard.setData(ClipboardData(text: formattedText));
-      toastMessage(context,
-          msg: 'recipe copied to clipboard', type: ToastType.other);
+      toastMessage(
+        context,
+        msg: 'recipe copied to clipboard',
+        type: ToastType.other,
+      );
     } catch (e) {
       toastMessage(context, msg: 'can\'t copy!', type: ToastType.error);
     }
   }
 
-  void deleteFood(BuildContext context, {required int id}) async {
+  void deleteFood(BuildContext context, {required int id, required String? imagePath}) async {
     final bool? confirm = await showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
@@ -32,9 +37,9 @@ class FoodDetailCubit extends Cubit<FoodDetailState> {
           content: Text(
             'Do you want to delete this Meal? This action cannot be undone.',
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  fontSize: 16.sp,
-                  color: ColorName.secondaryColor,
-                ),
+              fontSize: 16.sp,
+              color: ColorName.secondaryColor,
+            ),
           ),
           actions: <Widget>[
             TextButton(
@@ -42,10 +47,7 @@ class FoodDetailCubit extends Cubit<FoodDetailState> {
               onPressed: () => Navigator.of(context).pop(false),
             ),
             TextButton(
-              child: const Text(
-                'Delete',
-                style: TextStyle(color: Colors.red),
-              ),
+              child: const Text('Delete', style: TextStyle(color: Colors.red)),
               onPressed: () => Navigator.of(context).pop(true),
             ),
           ],
@@ -56,6 +58,12 @@ class FoodDetailCubit extends Cubit<FoodDetailState> {
       emit(DeleteFoodLoading());
       try {
         final db = FoodDatabaseService.instance;
+        if (imagePath != null) {
+          final file = File(imagePath);
+          if (await file.exists()) {
+            await file.delete();
+          }
+        }
         await db.deleteFoodItem(id);
         emit(DeleteFoodSuccess());
       } catch (e) {

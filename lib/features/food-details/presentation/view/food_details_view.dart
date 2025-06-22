@@ -18,8 +18,11 @@ class FoodDetailsView extends StatelessWidget {
         listener: (context, state) async {
           var homeCubit = HomeCubit.get(context);
           if (state is DeleteFoodSuccess) {
-            toastMessage(context,
-                msg: 'Food deleted successfully', type: ToastType.success);
+            toastMessage(
+              context,
+              msg: 'Food deleted successfully',
+              type: ToastType.success,
+            );
             await HistoryCubit.get(context).getHistory();
             if (context.mounted) Navigator.pop(context);
             if (homeCubit.foodItem != null) {
@@ -36,7 +39,11 @@ class FoodDetailsView extends StatelessWidget {
               title: Text("Food Details"),
               actions: [
                 IconButton(
-                  onPressed: () => cubit.deleteFood(context, id: foodItem.id),
+                  onPressed: () => cubit.deleteFood(
+                    context,
+                    id: foodItem.id,
+                    imagePath: foodItem.imagePath,
+                  ),
                   icon: Icon(Icons.delete_outline_rounded),
                 ),
               ],

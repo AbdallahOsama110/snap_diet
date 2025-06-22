@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import '../../../../../core/models/food_model.dart';
+import '../../../../../core/utils/light_theme.dart';
 import '../../../../food-details/presentation/view/food_details_view.dart';
 import '../../../data/history_datetime_format.dart';
 
@@ -24,12 +27,31 @@ class FoodItem extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 8),
       child: ListTile(
         onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => FoodDetailsView(foodItem: foodItem))),
+          context,
+          MaterialPageRoute(
+            builder: (context) => FoodDetailsView(foodItem: foodItem),
+          ),
+        ),
+        leading: ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: AspectRatio(
+            aspectRatio: 1,
+            child: Hero(
+              tag: foodItem.id,
+              child: Image.file(
+                File(foodItem.imagePath ?? ''),
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Icon(Icons.error, color: ColorName.primaryColor);
+                },
+              ),
+            ),
+          ),
+        ),
         title: Text(foodItem.name),
-        subtitle:
-            Text(historyDateTimeFormat(foodItem.timestamp ?? DateTime.now())),
+        subtitle: Text(
+          historyDateTimeFormat(foodItem.timestamp ?? DateTime.now()),
+        ),
         trailing: Row(
           spacing: 5,
           mainAxisSize: MainAxisSize.min,

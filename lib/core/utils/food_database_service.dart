@@ -32,6 +32,7 @@ class FoodDatabaseService {
       CREATE TABLE food_history (
         id INTEGER PRIMARY KEY,
         name TEXT NOT NULL,
+        imagePath TEXT NOT NULL,
         calories INTEGER NOT NULL,
         recipe TEXT NOT NULL,
         timestamp INTEGER NOT NULL
@@ -61,6 +62,7 @@ class FoodDatabaseService {
       {
         'id': food.id,
         'name': food.name,
+        'imagePath': food.imagePath,
         'calories': food.calories,
         'recipe': food.recipe,
         'timestamp': DateTime.now().millisecondsSinceEpoch,
@@ -94,6 +96,7 @@ class FoodDatabaseService {
       return FoodModel(
         id: maps[i]['id'],
         name: maps[i]['name'],
+        imagePath: maps[i]['imagePath'],
         calories: maps[i]['calories'],
         recipe: maps[i]['recipe'],
         timestamp: DateTime.fromMillisecondsSinceEpoch(maps[i]['timestamp']),

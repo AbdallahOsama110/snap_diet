@@ -2,6 +2,8 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:convert';
 import 'dart:math' hide log;
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -157,11 +159,26 @@ class HomeCubit extends Cubit<HomeStates> {
     return probabilities.indexOf(probabilities.reduce(max)) + 1;
   }
 
+  Future<String> saveImageToAppDirectory(String tempImagePath) async {
+    final tempImage = File(tempImagePath);
+    if (!await tempImage.exists()) {
+      throw Exception("Image does not exist at path: $tempImagePath");
+    }
+    final appDir = await getApplicationDocumentsDirectory();
+    final fileName =
+        'food_${DateTime.now().millisecondsSinceEpoch}${extension(tempImagePath)}';
+    final savedImagePath = join(appDir.path, fileName);
+    await tempImage.copy(savedImagePath);
+
+    return savedImagePath;
+  }
+
   void saveFoodItem() async {
     if (foodItem != null && !isFoodExist) {
       final db = FoodDatabaseService.instance;
       try {
         emit(SaveFoodLoading());
+        foodItem!.imagePath = await saveImageToAppDirectory(selectedImage!.path);
         await db.insertFood(foodItem!);
         log("Food item saved successfully");
         isFoodExist = true;

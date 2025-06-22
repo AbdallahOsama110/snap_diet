@@ -1,6 +1,7 @@
 class FoodModel {
   final int id;
   final String name;
+  String? imagePath;
   final int calories;
   final String recipe;
   final DateTime? timestamp;
@@ -11,6 +12,7 @@ class FoodModel {
     required this.calories,
     required this.recipe,
     this.timestamp,
+    this.imagePath,
   });
 
   factory FoodModel.fromJson(Map<String, dynamic> json) {
