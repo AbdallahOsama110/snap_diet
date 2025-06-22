@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../../core/models/food_model.dart';
@@ -24,16 +23,39 @@ class FoodDetailsViewBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Hero(
-            tag: foodItem.id,
-            child: Image.file(
-              File(foodItem.imagePath ?? ''),
-              height: 20.h,
-              width: double.infinity,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Icon(Icons.error, color: ColorName.primaryColor);
-              },
+          GestureDetector(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return Dialog(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.file(
+                        File(foodItem.imagePath ?? ''),
+                        errorBuilder: (context, error, stackTrace) {
+                          return Icon(
+                            Icons.error,
+                            color: ColorName.primaryColor,
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+            child: Hero(
+              tag: foodItem.id,
+              child: Image.file(
+                File(foodItem.imagePath ?? ''),
+                height: 20.h,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return SizedBox();
+                },
+              ),
             ),
           ),
           SizedBox(height: 3.h),
@@ -43,7 +65,7 @@ class FoodDetailsViewBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 FoodInfoSection(foodItem: foodItem),
-                SizedBox(height: 4.h),
+                SizedBox(height: 2.h),
                 RecipeSection(cubit: cubit, foodItem: foodItem),
                 SizedBox(height: 5.h),
               ],
