@@ -37,8 +37,8 @@ SnapDiet is a Flutter-powered offline mobile application that uses AI to identif
       <td align="center" width="20%"><img src="https://drive.google.com/uc?export=view&id=1oVL0Js-3-joY2ZED1UhNptM361TzdR1q" width="200"></td>
       <td align="center" width="20%"><img src="https://drive.google.com/uc?export=view&id=1otyZcfEytJfUNUTP6oWBoq5zfpUpOBYn" width="200"></td>
       <td align="center" width="20%"><img src="https://drive.google.com/uc?export=view&id=1oy69j4WqIQUZIdq8mPsyAE1uNoR2DtFl" width="200"></td>
-      <td align="center" width="20%"><img src="https://drive.google.com/uc?export=view&id=1p0yRvRjV0_Vzo0AMCxEOX4ouAuI6IVpe" width="200"></td>
-      <td align="center" width="20%"><img src="https://drive.google.com/uc?export=view&id=1ojlvBs4a4vAqOb6KX4BHZ_7Tqj-VmS7y" width="200"></td>
+      <td align="center" width="20%"><img src="https://drive.google.com/uc?export=view&id=1NMb7DbMY-GwqK1x5eZGuv2720ojlsntK" width="200"></td>
+      <td align="center" width="20%"><img src="https://drive.google.com/uc?export=view&id=1NGgwh0T0_F4ZuHtcLTiU4bnT3IXoVOdy" width="200"></td>
     </tr>
   </table>
 </div>
